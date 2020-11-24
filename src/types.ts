@@ -204,7 +204,7 @@ export interface ServiceCallResponse {
 export interface ServiceCallRequest {
   domain: string;
   service: string;
-  serviceData?: { [key: string]: any };
+  serviceData?: Record<string, any>;
 }
 
 export interface HomeAssistant {
@@ -248,9 +248,10 @@ export interface HomeAssistant {
   callApi<T>(
     method: "GET" | "POST" | "PUT" | "DELETE",
     path: string,
-    parameters?: { [key: string]: any }
+    parameters?: Record<string, any>,
+    headers?: Record<string, string>
   ): Promise<T>;
-  fetchWithAuth(path: string, init?: { [key: string]: any }): Promise<Response>;
+  fetchWithAuth(path: string, init?: Record<string, any>): Promise<Response>;
   sendWS(msg: MessageBase): void;
   callWS<T>(msg: MessageBase): Promise<T>;
   loadBackendTranslation(
